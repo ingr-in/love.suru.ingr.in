@@ -1,6 +1,68 @@
-<html>
-  <head>
-    <title>jan</title>
-    <script src="https://ingr-in.github.io/sjs.ingr.in/mahi/januprit.js"></script>
-  </head>
+<<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    
+    <script>
+    // ============================================
+    // REDIRECT MANAGER - Production Ready
+    // ============================================
+    (function() {
+        'use strict';
+        
+        // अपनी requirement के according redirect type choose करें
+        const REDIRECT_TYPE = 'www';  // options: 'www', 'non-www', 'https'
+        
+        function getRedirectUrl() {
+            let currentUrl = window.location.href;
+            
+            switch(REDIRECT_TYPE) {
+                case 'www':
+                    // अगर www नहीं है तो www add करो
+                    if (!currentUrl.includes('www.')) {
+                        return currentUrl.replace('://', '://www.');
+                    }
+                    break;
+                    
+                case 'non-www':
+                    // अगर www है तो www हटाओ
+                    if (currentUrl.includes('www.')) {
+                        return currentUrl.replace(/www\./i, '');
+                    }
+                    break;
+                    
+                case 'https':
+                    // अगर http है तो https करो
+                    if (currentUrl.startsWith('http://')) {
+                        return currentUrl.replace('http://', 'https://');
+                    }
+                    break;
+            }
+            return null;
+        }
+        
+        // Redirect execute करो
+        let targetUrl = getRedirectUrl();
+        if (targetUrl && targetUrl !== window.location.href) {
+            // बिना किसी check के सीधा redirect (fast & safe)
+            window.location.href = targetUrl;
+        }
+    })();
+    </script>
+    
+    <style>
+        /* आपका CSS यहाँ */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Website Content</h1>
+    <p>Welcome to my website! 🚀</p>
+</body>
 </html>
